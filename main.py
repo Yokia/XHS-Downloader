@@ -58,7 +58,7 @@ async def app():
         await xhs.run_async()
 
 
-async def server(host="0.0.0.0", port=8000, log_level="info", ):
+async def server(host="0.0.0.0", port=8001, log_level="info", ):
     async with XHS(**Settings().run()) as xhs:
         await xhs.run_server(host, port, log_level, )
 
@@ -68,9 +68,10 @@ if __name__ == '__main__':
             KeyboardInterrupt,
             CancelledError,
     ):
-        if len(argv) == 1:
-            run(app())
-        elif argv[1] == "server":
-            run(server())
-        else:
-            cli()
+        # if len(argv) == 1:
+        #     run(app())
+        # elif argv[1] == "server":
+        #     run(server())
+        # else:
+        #     cli()
+        run(server())

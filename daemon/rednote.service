@@ -1,0 +1,14 @@
+[Unit]
+Description=www/wwwroot/rednote/main.py deamon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/www/wwwroot/rednote
+ExecStart=/www/wwwroot/rednote/venv/bin/python3 main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
