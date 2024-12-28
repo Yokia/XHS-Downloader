@@ -45,7 +45,9 @@ class Explore:
         container["作品描述"] = data.safe_extract("desc")
         container["作品类型"] = self.explore_type.get(
             data.safe_extract("type"), "未知")
-        # container["IP归属地"] = data.safe_extract("ipLocation")
+        imageList = data.safe_extract("imageList", [])
+        container["作品封面"] = Namespace.object_extract(imageList[0], "urlDefault")
+        container["IP归属地"] = data.safe_extract("ipLocation")
 
     def __extract_time(self, container: dict, data: Namespace):
         container["发布时间"] = datetime.fromtimestamp(
@@ -58,6 +60,8 @@ class Explore:
             1000).strftime(
             self.time_format) if (
             last := data.safe_extract("lastUpdateTime")) else "未知"
+        container["publishTime"] = data.safe_extract("time")
+        container['lastUpdateTime'] = data.safe_extract("lastUpdateTime")
 
     @staticmethod
     def __extract_user(container: dict, data: Namespace):
